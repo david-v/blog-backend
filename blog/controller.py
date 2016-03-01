@@ -27,7 +27,7 @@ def add_comment_to_post(request, post_id):
     elif request.method == 'POST':
         try:
             post = Post.objects.get(pk=post_id)
-            json_body = json.loads(request.body)
+            json_body = json.loads(request.body.decode('utf-8'))
             comment_body = json_body['body']
             comment_author = json_body['author']
             Comment.objects.create(post=post, author=comment_author, body=comment_body)
