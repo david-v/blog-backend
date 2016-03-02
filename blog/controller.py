@@ -30,7 +30,7 @@ def add_comment_to_post(request, post_id):
     response['Access-Control-Allow-Credentials'] = 'true'
     response['Access-Control-Allow-Methods'] = 'POST'
 
-    if request.method == 'OPTIONS':
+    if request.method == 'OPTIONS':  # for preflight calls
         response.status = 200
     elif request.method == 'POST':
         try:
