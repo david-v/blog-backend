@@ -49,7 +49,7 @@ class Comment(models.Model):
 
     def serialize(self):
         return {
-            'title': self.author,
+            'author': self.author,
             'createdOn': int(time.mktime(self.createdOn.timetuple())*1000),
             'body': self.body
         }
