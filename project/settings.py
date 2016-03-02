@@ -1,7 +1,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-SECRET_KEY = ''
+SECRET_KEY = 'j^a+*n-fph$zc=kd69fcf3q7pw45-f-bg&z*(fx49ry+kmqnwy'
 DEBUG = True
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
@@ -27,8 +27,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
-        'USER': '',
+        'NAME': 'blog',
+        'USER': 'root',
         'PASSWORD': '',
         'PORT': '3306',
         'HOST': '127.0.0.1'

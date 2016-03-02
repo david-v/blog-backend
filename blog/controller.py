@@ -6,7 +6,7 @@ from .models import Post, Comment
 
 def get_all_posts(request):
     response = HttpResponse(content_type="application/json")
-    response['Access-Control-Allow-Origin'] = 'http://david.veli.la'
+    response['Access-Control-Allow-Origin'] = 'http://localhost'
     response['Access-Control-Allow-Headers'] = 'Content-Type'
     response['Access-Control-Allow-Credentials'] = 'true'
 
@@ -26,7 +26,7 @@ def get_all_posts(request):
 @csrf_exempt
 def add_comment_to_post(request, post_id):
     response = HttpResponse(content_type="application/json")
-    response['Access-Control-Allow-Origin'] = 'http://david.veli.la'
+    response['Access-Control-Allow-Origin'] = 'http://localhost'
     response['Access-Control-Allow-Headers'] = 'X-CSRFToken, Content-Type'
     response['Access-Control-Allow-Credentials'] = 'true'
     response['Access-Control-Allow-Methods'] = 'POST'
