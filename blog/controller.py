@@ -1,6 +1,6 @@
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import json
-
 from .models import Post, Comment
 
 
@@ -24,6 +24,7 @@ def get_all_posts(request):
     return response
 
 
+@csrf_exempt
 def add_comment_to_post(request, post_id):
     response = HttpResponse(content_type="application/json")
     response['Access-Control-Allow-Origin'] = 'http://localhost'
