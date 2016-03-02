@@ -53,3 +53,4 @@ class Comment(models.Model):
             'createdOn': int(time.mktime(self.createdOn.timetuple())*1000),
             'body': self.body
         }
+
