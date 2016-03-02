@@ -62,5 +62,3 @@ def add_comment_to_post(request, post_id):
     Comment.objects.create(post=post, author=comment_author, body=comment_body)
     response.status_code = 201
     return response
-
-
