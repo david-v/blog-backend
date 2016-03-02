@@ -56,7 +56,7 @@ def add_comment_to_post(request, post_id):
         return response
 
     if comment_captcha != (post.id % 8):
-        response.status_code = 403
+        response.status_code = 418
         return response
 
     Comment.objects.create(post=post, author=comment_author, body=comment_body)
