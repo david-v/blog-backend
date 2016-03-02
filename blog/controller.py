@@ -47,13 +47,18 @@ def add_comment_to_post(request, post_id):
 
     json_body = json.loads(request.body.decode('utf-8'))
 
-    comment_captcha = json_body['captcha']
-    if comment_captcha != (post.id % 8):
+    try:
+        comment_captcha = json_body['captcha']
+        comment_body = json_body['body']
+        comment_author = json_body['author']
+    except KeyError:
         response.status_code = 406
         return response
 
-    comment_body = json_body['body']
-    comment_author = json_body['author']
+    if comment_captcha != (post.id % 8):
+        response.status_code = 403
+        return response
+
     Comment.objects.create(post=post, author=comment_author, body=comment_body)
     response.status_code = 201
     return response
