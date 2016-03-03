@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Post, Comment
 import project.settings
+import scraper
 
 
 def get_all_posts(request):
@@ -65,3 +66,7 @@ def add_comment_to_post(request, post_id):
     response.status_code = 201
     return response
 
+
+def run_scraper(request):
+    posts = scraper.scrape_all_repos()
+    return HttpResponse(json.dumps(posts), content_type="application/json")
