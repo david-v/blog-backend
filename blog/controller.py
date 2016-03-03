@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Post, Comment
 import project.settings
-import scraper
+from .scraper import scrape_all_repos
 
 
 def get_all_posts(request):
@@ -16,7 +16,7 @@ def get_all_posts(request):
         response.status_code = 405
         return response
 
-    posts = Post.objects.filter(published=True).prefetch_related('comments').order_by('-createdOn')
+    posts = Post.objects.filter(published=True).prefetch_related('comments').order_by('-created_on')
     data = []
     for post in posts:
         data.append(post.serialize())
@@ -68,5 +68,5 @@ def add_comment_to_post(request, post_id):
 
 
 def run_scraper(request):
-    posts = scraper.scrape_all_repos()
+    posts = scrape_all_repos()
     return HttpResponse(json.dumps(posts), content_type="application/json")

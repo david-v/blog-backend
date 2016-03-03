@@ -15,10 +15,10 @@ def scrape_all_repos():
 
 
 def scrape_repo(repo):
-    print 'SCRAPING: ' + repo.logbook_url
+    print('SCRAPING: ' + repo.logbook_url)
     page = requests.get(repo.logbook_url)
     if page.status_code != 200:
-        print 'Error ' + page.status_code + ' scraping ' + repo.logbook_url
+        print('Error ' + page.status_code + ' scraping ' + repo.logbook_url)
         return False
     tree = html.fromstring(page.content)
     element = tree.xpath('//*[@id="readme"]/article')[0]
@@ -45,12 +45,12 @@ def scrape_repo(repo):
                     post.body = ''
                     post.tags = repo.name
             else:
-                post.body += etree.tostring(child, encoding='utf8', method='xml')
+                body_string = etree.tostring(child, encoding='utf8', method='xml')
+                post.body += body_string.decode("utf-8")
     if not new_post:
         posts.append(post)
 
     for post_scraped in posts:
-        print post_scraped.body
         post_scrape_date = post_scraped.created_on.replace(tzinfo=pytz.UTC)
         if post_scrape_date > repo.last_scraped:
             post_scraped.save()

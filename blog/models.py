@@ -57,7 +57,7 @@ class Comment(models.Model):
 
 @python_2_unicode_compatible
 class Repo(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
     logbook_url = models.CharField(max_length=100)
     last_scraped = models.DateTimeField(default=datetime.now)
     enabled = models.BooleanField()
