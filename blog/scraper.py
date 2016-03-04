@@ -28,25 +28,30 @@ def scrape_repo(repo):
     post = Post()
 
     for child in element.getchildren():
-        if child.tag == 'hr' and not new_post:
+        if child.tag == 'h1':
+            continue
+        elif child.tag == 'h4' and new_post:
+            post = Post()
+            new_post = False
+            post.title = child.text
+            post.published = False
+            post.body = ''
+        elif child.tag == 'h6':
+            subtag = child.getchildren()[0]
+            if subtag.tag == 'a':
+                post.created_on = parser.parse(child.text)
+                post.tags = repo.name
+        elif child.tag == 'p':
+            body_string = etree.tostring(child, encoding='utf8', method='xml')
+            post.body += body_string.decode("utf-8")
+        elif child.tag == 'blockquote':
+            subtag = child.getchildren()[0]
+            if subtag.tag == 'p':
+                post.tags = subtag.text
+        elif child.tag == 'hr' and not new_post:
             new_post = True
             posts.append(post)
-        elif child.tag == 'p':
-            if child.text is None:
-                subtag = child.getchildren()[0]
-                if (subtag.tag == 'strong') and (subtag.text == 'Daily logbook'):
-                    continue
-                elif subtag.tag == 'em' and new_post:
-                    post = Post()
-                    new_post = False
-                    post.created_on = parser.parse(subtag.text)
-                    post.title = 'UNTITLED'
-                    post.published = False
-                    post.body = ''
-                    post.tags = repo.name
-            else:
-                body_string = etree.tostring(child, encoding='utf8', method='xml')
-                post.body += body_string.decode("utf-8")
+
     if not new_post:
         posts.append(post)
 
