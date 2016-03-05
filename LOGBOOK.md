@@ -62,7 +62,7 @@ A million thanks to this guide which helped me massively to setup the whole thin
 
 ######4 Mar 2016
 
-Now that my blog's backend and frontend are connected in their live versions: [david.veli.la/blog](http://david.veli.la/blog) I need to mke the scraper that will populate my blog with contents from my LOGBOOK.md files from my repositories in Github. After I wrote in Python the scraper for wikipedia's information on Spanish towns, this isn't a difficult task at all. Just some XPath magic and my databases are populated! 
+Now that my blog's backend and frontend are connected in their live versions: [david.veli.la/blog](http://david.veli.la/blog) I need to make the scraper that will populate my blog with contents from my LOGBOOK.md files from my Github repositories. After I wrote in Python the scraper for wikipedia's information on Spanish towns, this isn't a difficult task at all. Just some XPath magic and my databases are populated!
 
 My blog's ready! From now on, every time I work on personal projects that I put on Github, I won't have to do anything and my blog will start posting these notes in a nice modern format thanks to Angular and Modernizer.
 
