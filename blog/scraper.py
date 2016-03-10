@@ -3,7 +3,6 @@ import pytz as pytz
 import requests
 from .models import Repo, Post
 from lxml import html, etree
-from dateutil import parser
 
 
 def scrape_all_repos():
@@ -41,7 +40,7 @@ def scrape_repo(repo):
         elif child.tag == 'h6':
             subtag = child.getchildren()[0]
             if subtag.tag == 'a':
-                post.created_on = parser.parse(subtag.tail)
+                post.created_on = datetime.strptime(subtag.tail, "%d %b %Y")
                 post.tags = repo.name
         elif child.tag == 'p':
             body_string = etree.tostring(child, encoding='utf8', method='xml')
