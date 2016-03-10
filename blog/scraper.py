@@ -31,15 +31,17 @@ def scrape_repo(repo):
         if child.tag == 'h1':
             continue
         elif child.tag == 'h4' and new_post:
-            post = Post()
-            new_post = False
-            post.title = child.text
-            post.published = False
-            post.body = ''
+            subtag = child.getchildren()[0]
+            if subtag.tag == 'a':
+                post = Post()
+                new_post = False
+                post.title = subtag.tail
+                post.published = False
+                post.body = ''
         elif child.tag == 'h6':
             subtag = child.getchildren()[0]
             if subtag.tag == 'a':
-                post.created_on = parser.parse(child.text)
+                post.created_on = parser.parse(subtag.tail)
                 post.tags = repo.name
         elif child.tag == 'p':
             body_string = etree.tostring(child, encoding='utf8', method='xml')
